@@ -35,7 +35,7 @@ module.exports = yeoman.generators.Base.extend({
       this.src.copy('package.json', 'package.json');
       this.src.copy('Gruntfile.js', 'Gruntfile.js');
       
-      this.directory('scr', 'scr');
+      this.directory('src', 'src');
     },
 
     projectfiles: function () {
@@ -50,6 +50,7 @@ module.exports = yeoman.generators.Base.extend({
     var generator = this;    
     generator.installDependencies({
       skipInstall: generator.options['skip-install'],
+      bower: false,
       callback: function () {
         if (generator.options['skip-install']) {
           generator.log("All done. The installation of the dependencies has been skipped. You need to run 'npm install' before you can run 'grunt serve' to see the application in action. If karma cannot find PhantomJS, run 'npm install karma-phantomjs-launcher' to install its missing dependencies. Cheers");
