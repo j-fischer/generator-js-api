@@ -74,7 +74,7 @@ describe('run grunt', function () {
             console.log('Error: ' + error);
           
           expect(stdout).to.contain('No problems');  
-          expect(stdout).to.contain('Executed 1 of 1 SUCCESS');
+          expect(stdout).to.contain('Executed 1 of 1\u001b[32m SUCCESS');
           expect(stdout).to.contain('Done, without errors.');
           done();
         });
