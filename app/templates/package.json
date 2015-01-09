@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "nb-messaging",
+  "name": "api",
   "description": "Javascript extension for SMART's NBSDK",
   "version": "1.0.0",
   "devDependencies": {
