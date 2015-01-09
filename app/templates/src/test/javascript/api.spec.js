@@ -18,7 +18,6 @@ describe('NB Messaging API', function(){
       _clock = sinon.useFakeTimers();
     });
     afterEach(function () {
-			_clock.tick(_DEFAULT_TIMEOUT); // cleans up all registered callbacks
       _clock.restore();
     });  
 		
