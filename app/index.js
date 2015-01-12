@@ -82,7 +82,7 @@ module.exports = yeoman.generators.Base.extend({
           generator.log("Running 'npm install karma-phantomjs-launcher' to ensure its dependencies will be installed. This will avoid issues with PhantomJS when running grunt.");
           generator.npmInstall(['karma-phantomjs-launcher']);
 
-          this.log(yosay(
+          generator.log(yosay(
             "All done. You can run 'grunt' to build your API. Cheers"
           ));
         }
