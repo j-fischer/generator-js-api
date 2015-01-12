@@ -74,7 +74,7 @@ module.exports = yeoman.generators.Base.extend({
       bower: false,
       callback: function () {
         if (generator.options['skip-install']) {
-          generator.log("All done. The installation of the dependencies has been skipped. You need to run 'npm install' before you can run 'grunt serve' to see the application in action. If karma cannot find PhantomJS, run 'npm install karma-phantomjs-launcher' to install its missing dependencies. Cheers");
+          generator.log("All done. The installation of the dependencies has been skipped. You need to run 'npm install' before you can run 'grunt' to build your API. If karma cannot find PhantomJS, run 'npm install karma-phantomjs-launcher' to install its missing dependencies. Cheers");
         } else {
           /* The following installation will install the missing dependencies for the karma-phantomjs-launcher. Those dependencies won't be installed
            * when running 'npm install' as this only installs top-level modules listed in package.json (see https://github.com/npm/npm/issues/1341). 
@@ -82,7 +82,9 @@ module.exports = yeoman.generators.Base.extend({
           generator.log("Running 'npm install karma-phantomjs-launcher' to ensure its dependencies will be installed. This will avoid issues with PhantomJS when running grunt.");
           generator.npmInstall(['karma-phantomjs-launcher']);
 
-          generator.log("All done. You can run 'grunt serve' to see the application in action. Cheers");
+          this.log(yosay(
+            "All done. You can run 'grunt' to build your API. Cheers"
+          ));
         }
       }
     });
