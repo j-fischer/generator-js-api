@@ -25,7 +25,7 @@ describe('My API', function(){
 		 * TESTS
 		 */
     it("should do something", function () {
-      
+      {{$API_NAME}}.myFunc();
 		});
   });
 });

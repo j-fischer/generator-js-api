@@ -4,7 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
-  _copyAndReplacePlaceholder: function(args) {
+  _copyAndReplace: function(args) {
     var file = this.readFileAsString(this.templatePath(args.sourcePath));
     file = file.replace(args.placeholder, args.value);
     this.write(this.destinationPath(args.destPath || args.sourcePath), file);
@@ -43,16 +43,29 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
     app: function () {
       var answers = this.env.options;
-      
-      
+          
       this.src.copy('Gruntfile.js', 'Gruntfile.js');
-      this._copyAndReplacePlaceholder({sourcePath: 'package.json', placeholder: '{{$FILENAME}}', value: answers.filename});
       
-      var apiFile = this.readFileAsString(this.templatePath('src/main/javascript/api.js'));
-      apiFile = apiFile.replace(/\{\{\$API_NAME\}\}/g, answers.namespace);
-      this.write(this.destinationPath('src/main/javascript/' + answers.filename + '.js'), apiFile);
+      this._copyAndReplace({
+        sourcePath: 'package.json', 
+        placeholder: '{{$FILENAME}}', 
+        value: answers.filename
+      });
       
-      this.src.copy('src/test/javascript/api.spec.js', 'src/test/javascript/' + answers.filename + '.spec.js');
+      this._copyAndReplace({
+        sourcePath: 'src/main/javascript/api.js', 
+        destPath: 'src/main/javascript/' + answers.filename + '.js', 
+        placeholder: /\{\{\$API_NAME\}\}/g, 
+        value: answers.namespace
+      });
+      
+      this._copyAndReplace({
+        sourcePath: 'src/test/javascript/api.spec.js', 
+        destPath: 'src/test/javascript/' + answers.filename + '.spec.js', 
+        placeholder: /\{\{\$API_NAME\}\}/g, 
+        value: answers.namespace
+      });
+      
       this.src.copy('src/test/karma.conf.js', 'src/test/karma.conf.js');
     },
 
@@ -63,7 +76,12 @@ module.exports = yeoman.generators.Base.extend({
       this.src.copy('gitignore', '.gitignore');
       this.src.copy('hgignore', '.hgignore');
       
-      this._copyAndReplacePlaceholder({sourcePath: 'jshintrc', destPath: '.jshintrc', placeholder: '{{$NAMESPACE_ROOT}}', value: answers.namespace.split('.')[0]});
+      this._copyAndReplace({
+        sourcePath: 'jshintrc', 
+        destPath: '.jshintrc', 
+        placeholder: '{{$NAMESPACE_ROOT}}', 
+        value: answers.namespace.split('.')[0]
+      });
     }
   },
 
