@@ -1,8 +1,18 @@
-if (typeof(window.My) === "undefined") {
-  window.My = {};
-}
+(function () { // initializes namepsace if neccessary
+  var namespaceString = '{{$API_NAME}}';
+  
+    var parts = namespaceString.split('.'),
+        parent = window,
+        currentPart = '';    
+        
+    for(var i = 0, length = parts.length; i < length; i++) {
+        currentPart = parts[i];
+        parent[currentPart] = parent[currentPart] || {};
+        parent = parent[currentPart];
+    }
+})();
 
-My.Api = (function () {
+{{$API_NAME}} = (function () {
   
   function init() {
     

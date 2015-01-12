@@ -1,4 +1,4 @@
-describe('NB Messaging API', function(){
+describe('My API', function(){
   
   var _clock;
   

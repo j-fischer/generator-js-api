@@ -25,6 +25,6 @@
     "after": false,
     "afterEach": false,
     "window": true,
-    "My": true
+    "{{$NAMESPACE_ROOT}}": true
   }
 }

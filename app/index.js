@@ -4,6 +4,12 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
+  _copyAndReplacePlaceholder: function(args) {
+    var file = this.readFileAsString(this.templatePath(args.sourcePath));
+    file = file.replace(args.placeholder, args.value);
+    this.write(this.destinationPath(args.destPath || args.sourcePath), file);
+  },
+  
   initializing: function () {
     this.pkg = require('../package.json');
   },
@@ -13,36 +19,51 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the superb' + chalk.red('JsApi') + ' generator!'
+      'Welcome to the ' + chalk.red('JsApi') + ' generator!'
     ));
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
-
-    this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
-
+    this.prompt([{
+      type    : 'input',
+      name    : 'namespace',
+      message : 'What is the fully qualified name of your API (namepsace + class name), i.e. "com.mycompany.SomeApi"',
+      default : "my.Api"
+    }, 
+    {
+      type    : 'input',
+      name    : 'filename',
+      message : 'What is the file name of your API. The extension ".js" will be automatically added',
+      default : this.appname.trim().replace(/\s/g, "-") // Default to current folder name with white spaces removed or replaced
+    }
+    ], function (answers) {
+      this.env.options = answers;
       done();
     }.bind(this));
   },
 
   writing: {
     app: function () {
-      this.src.copy('package.json', 'package.json');
-      this.src.copy('Gruntfile.js', 'Gruntfile.js');
+      var answers = this.env.options;
       
-      this.directory('src', 'src');
+      
+      this.src.copy('Gruntfile.js', 'Gruntfile.js');
+      this._copyAndReplacePlaceholder({sourcePath: 'package.json', placeholder: '{{$FILENAME}}', value: answers.filename});
+      
+      var apiFile = this.readFileAsString(this.templatePath('src/main/javascript/api.js'));
+      apiFile = apiFile.replace(/\{\{\$API_NAME\}\}/g, answers.namespace);
+      this.write(this.destinationPath('src/main/javascript/' + answers.filename + '.js'), apiFile);
+      
+      this.src.copy('src/test/javascript/api.spec.js', 'src/test/javascript/' + answers.filename + '.spec.js');
+      this.src.copy('src/test/karma.conf.js', 'src/test/karma.conf.js');
     },
 
     projectfiles: function () {
+      var answers = this.env.options;
+      
       this.src.copy('editorconfig', '.editorconfig');
-      this.src.copy('jshintrc', '.jshintrc');
       this.src.copy('gitignore', '.gitignore');
       this.src.copy('hgignore', '.hgignore');
+      
+      this._copyAndReplacePlaceholder({sourcePath: 'jshintrc', destPath: '.jshintrc', placeholder: '{{$NAMESPACE_ROOT}}', value: answers.namespace.split('.')[0]});
     }
   },
 

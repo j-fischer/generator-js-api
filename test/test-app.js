@@ -14,6 +14,7 @@ describe('rjs-ember:app with skip-install option', function () {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
+      .withPrompt({ namespace: 'my.Api', filename: 'api' })
       .on('end', done);
   });
 
@@ -28,7 +29,7 @@ describe('rjs-ember:app with skip-install option', function () {
     ]);
   });
   
-  it('creates api and test files', function () {
+  it('creates default api and test files', function () {
     assert.file([
       'src/main/javascript/api.js',
       'src/test/javascript/api.spec.js',
@@ -40,6 +41,27 @@ describe('rjs-ember:app with skip-install option', function () {
     assert.noFile([
       'node_modules'
     ]);
+  });
+});
+
+describe('rjs-ember:app with user overrides', function () {
+  
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({ namespace: 'some.Api', filename: 'someApi' })
+      .on('end', done);
+  });
+  
+  it('creates user specified api and test files', function () {
+    assert.file([
+      'src/main/javascript/someApi.js',
+      'src/test/javascript/someApi.spec.js'
+    ]);
+    
+    assert.fileContent('src/main/javascript/someApi.js', /some\.Api = \(function/);
+    assert.fileContent('.jshintrc', /"some"\: true/);
   });
 });
 
@@ -68,6 +90,7 @@ describe('run grunt', function () {
   it ('should pass grunt build', function (done) {
     app
       .withOptions({ 'skip-install': true })
+      .withPrompt({ namespace: 'my.Api', filename: 'api' })
       .on('end', function () {
         exec('grunt', function (error, stdout, stderr) {
           if (error)

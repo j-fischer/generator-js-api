@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "api",
+  "name": "{{$FILENAME}}",
   "description": "Javascript extension for SMART's NBSDK",
   "version": "1.0.0",
   "devDependencies": {
