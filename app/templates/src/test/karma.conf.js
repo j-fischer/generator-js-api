@@ -37,7 +37,7 @@ module.exports = function (config) {
       reporters: [
         {
           type : 'html',
-          dir : 'coverage/',
+          dir : 'docs/coverage/',
           file: 'coverage-report.html'
         },
         {type: 'text-summary'} /* Will output to console */

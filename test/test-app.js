@@ -99,6 +99,8 @@ describe('run grunt', function () {
           expect(stdout).to.contain('No problems');  
           expect(stdout).to.contain('Executed 1 of 1\u001b[32m SUCCESS');
           expect(stdout).to.contain('Done, without errors.');
+          
+          assert.file(['docs/coverage', 'docs/jsdoc']);
           done();
         });
       });

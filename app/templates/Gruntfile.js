@@ -53,6 +53,15 @@ module.exports = function (grunt) {
       links: ["dist/**", "coverage/**"]
     },
     
+    jsdoc : {
+      dist : {
+        src: ['<%= config.app %>/*.js', '<%= config.app %>/**/*.js'], 
+        options: {
+          destination: 'docs/jsdoc'
+        }
+      }
+    },
+    
     copy: {
       dist: {
         src: '<%= config.app %>/<%= pkg.name %>.js',
@@ -131,7 +140,8 @@ module.exports = function (grunt) {
     'jshint',
     'karma:unit_phantomjs',
     'copy:dist',
-    'uglify'
+    'uglify',
+    'jsdoc'
   ]);
   
   // Setup default task that runs when you just run 'grunt'
