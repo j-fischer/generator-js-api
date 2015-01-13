@@ -25,6 +25,8 @@
      * This is an API method that does something.
      * @param {object} args
      *   @param {string} args.aParam: this is a parameter for this method
+     *
+     * @module {{$API_NAME}}
      */
     myFunc: function (args) {
       
