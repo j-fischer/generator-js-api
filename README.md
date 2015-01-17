@@ -1,47 +1,55 @@
 # generator-js-api [![Build Status](https://secure.travis-ci.org/j-fischer/generator-js-api.png?branch=master)](https://travis-ci.org/j-fischer/generator-js-api)
 
-> [Yeoman](http://yeoman.io) generator
+[Yeoman](http://yeoman.io) generator that scaffolds out a develoment environment for a Javascript API.
+
+## Features
+
+* Automatically lint your scripts
+* Unit Testing with Karma and PhantomJS
+* Minification and versioning
+* Support for source maps 
+* Support for JSDoc 
+
+For more information on what `generator-js-api` can do for you, take a look at the Gruntfile.js. 
 
 
 ## Getting Started
 
-### What is Yeoman?
+- Install: `npm install -g generator-js-api`
+- Run: `yo js-api`
+- Run `grunt` for building
 
-Trick question. It's not a thing. It's this guy:
+## Prompts
 
-![](http://i.imgur.com/JHaAlBJ.png)
+* namespace
 
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
+  The namspace (default is 'my.Api') will be added to the API's (see filename prompt below) file. The API file will ensure that the 
+  namespace is created for testing and that the top level object is known to JSHint. There is no validation done on the namespace. 
+  
+* filename
 
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+  This input will be the filename of your API. It will be used to rename the default, 'api.js', to whatever you choose, i.e. my-api.js.
+  Any whitespace within the filename will be replaced with a dash '-'.
 
-```bash
-npm install -g yo
-```
+## Options
 
-### Yeoman Generators
+* `--skip-install`
 
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
+  Skips the automatic execution of `npm install` after scaffolding has finished.
 
-To install generator-js-api from npm, run:
+## Project Overview
 
-```bash
-npm install -g generator-js-api
-```
+The API template uses a functional style for the API, which allows for better encapsulation by declaring private functions and members. 
+All public interface methods are returned by the function in form of an object. They can either point to private function or be a
+function implementation themselves. 
 
-Finally, initiate the generator:
+## Contribute
 
-```bash
-yo js-api
-```
+Feel free to contact me if you like to contribute.
 
-### Getting To Know Yeoman
-
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+If not, `generator-js-api` is fork-friendly and you can always maintain a custom version which you `npm install && npm link` to continue using via `yo js-api` or a name of your choosing.
 
 
 ## License
 
-MIT
+[MIT](http://opensource.org/licenses/MIT)
