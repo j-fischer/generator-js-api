@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "nb-messaging",
-  "description": "Javascript extension for SMART's NBSDK",
+  "name": "js-api-test-dependencies",
+  "description": "Javascript API generator tests",
   "version": "1.0.0",
   "devDependencies": {
     "grunt": "~0.4.2",

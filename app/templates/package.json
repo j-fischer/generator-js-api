@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "{{$FILENAME}}",
-  "description": "Javascript extension for SMART's NBSDK",
+  "description": "Javascript API",
   "version": "1.0.0",
   "devDependencies": {
     "grunt": "~0.4.2",
