@@ -4,3 +4,8 @@ node_js:
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-js-api' ]; then cd .. && eval "mv $currentfolder generator-js-api" && cd generator-js-api; fi
+before_script: 
+  - gem install sass
+  - cd test/fixtures
+  - npm install
+  - cd ../..
