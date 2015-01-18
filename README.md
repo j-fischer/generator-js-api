@@ -40,8 +40,7 @@ For more information on what `generator-js-api` can do for you, take a look at t
 ## Project Overview
 
 The API template uses a functional style for the API, which allows for better encapsulation by declaring private functions and members. 
-All public interface methods are returned by the function in form of an object. They can either point to private function or be a
-function implementation themselves. 
+All public interface methods are returned by the function in form of an object. They can either point to private function or be a function implementation themselves. 
 
 ## Contribute
 
