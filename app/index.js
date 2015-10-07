@@ -6,7 +6,12 @@ var yosay = require('yosay');
 module.exports = yeoman.generators.Base.extend({
   _copyAndReplace: function(args) {
     var file = this.readFileAsString(this.templatePath(args.sourcePath));
-    file = file.replace(args.placeholder, args.value);
+    
+    for (var i = 0; i < args.replacements.length; i++) {
+      var repl = args.replacements[i];
+      file = file.replace(repl.placeholder, repl.value);
+    }
+    
     this.write(this.destinationPath(args.destPath || args.sourcePath), file);
   },
   
@@ -22,6 +27,7 @@ module.exports = yeoman.generators.Base.extend({
       'Welcome to the ' + chalk.red('JsApi') + ' generator!'
     ));
 
+    var moduleName = this.appname.trim().replace(/\s/g, "-"); // Default to current folder name with white spaces removed or replaced
     this.prompt([{
       type    : 'input',
       name    : 'namespace',
@@ -30,9 +36,15 @@ module.exports = yeoman.generators.Base.extend({
     }, 
     {
       type    : 'input',
+      name    : 'module',
+      message : 'What is the name of your API\'s AMD module, i.e "some-api"',
+      default : moduleName
+    }, 
+    {
+      type    : 'input',
       name    : 'filename',
       message : 'What is the file name of your API. The extension ".js" will be automatically added',
-      default : this.appname.trim().replace(/\s/g, "-") // Default to current folder name with white spaces removed or replaced
+      default : moduleName
     }
     ], function (answers) {
       this.env.options = answers;
@@ -48,22 +60,28 @@ module.exports = yeoman.generators.Base.extend({
       
       this._copyAndReplace({
         sourcePath: 'package.json', 
-        placeholder: '{{$FILENAME}}', 
-        value: answers.filename
+        replacements: [{
+          placeholder: '{{$FILENAME}}', 
+          value: answers.filename
+        }]
       });
       
       this._copyAndReplace({
         sourcePath: 'src/main/javascript/api.js', 
         destPath: 'src/main/javascript/' + answers.filename + '.js', 
-        placeholder: /\{\{\$API_NAME\}\}/g, 
-        value: answers.namespace
+        replacements: [
+          { placeholder: /\{\{\$API_NAME\}\}/g, value: answers.namespace },
+          { placeholder: /\{\{\$MODULE_NAME\}\}/g, value: answers.module.toLowerCase() }
+        ]
       });
       
       this._copyAndReplace({
         sourcePath: 'src/test/javascript/api.spec.js', 
         destPath: 'src/test/javascript/' + answers.filename + '.spec.js', 
-        placeholder: /\{\{\$API_NAME\}\}/g, 
-        value: answers.namespace
+        replacements: [{
+          placeholder: /\{\{\$API_NAME\}\}/g, 
+          value: answers.namespace
+        }]
       });
       
       this.src.copy('src/test/karma.conf.js', 'src/test/karma.conf.js');
@@ -79,8 +97,10 @@ module.exports = yeoman.generators.Base.extend({
       this._copyAndReplace({
         sourcePath: 'jshintrc', 
         destPath: '.jshintrc', 
-        placeholder: '{{$NAMESPACE_ROOT}}', 
-        value: answers.namespace.split('.')[0]
+        replacements: [{
+          placeholder: '{{$NAMESPACE_ROOT}}', 
+          value: answers.namespace.split('.')[0]
+        }]
       });
     }
   },

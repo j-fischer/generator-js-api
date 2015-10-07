@@ -12,7 +12,7 @@
     }
 })();
 
-{{$API_NAME}} = (function () {
+(function () {
   
   function init() {
     
@@ -20,16 +20,29 @@
   
   init();
   
-  return {
+ /** 
+  * This is a module. 
+  *
+  * @exports {{$MODULE_NAME}}
+  */
+  var API = {
     /** 
      * This is an API method that does something.
      * @param {object} args
      *   @param {string} args.aParam: this is a parameter for this method
      *
-     * @module {{$API_NAME}}
+     * @module {{$MODULE_NAME}}
      */
     myFunc: function (args) {
       
     }
   };
+  
+  if ( typeof define === "function" && define.amd ) {
+  	define("{{$MODULE_NAME}}", [], function() {
+  		return API;
+  	});
+  }
+
+  window.{{$API_NAME}} = API;
 })();

@@ -26,6 +26,10 @@ For more information on what `generator-js-api` can do for you, take a look at t
   The namspace (default is 'my.Api') will be added to the API's (see filename prompt below) file. The API file will ensure that the 
   namespace is created for testing and that the top level object is known to JSHint. There is no validation done on the namespace. 
   
+* module
+
+  The name of the AMD module (default is 'my-api') will used when registering the API as an AMD module. The module will only be registered if the define function is present and contains the 'amd' property. 
+  
 * filename
 
   This input will be the filename of your API. It will be used to rename the default, 'api.js', to whatever you choose, i.e. my-api.js.

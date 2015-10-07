@@ -9,7 +9,7 @@ var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
 
-describe('rjs-ember:app with skip-install option', function () {
+describe('js-api:app with skip-install option', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -44,13 +44,13 @@ describe('rjs-ember:app with skip-install option', function () {
   });
 });
 
-describe('rjs-ember:app with user overrides', function () {
+describe('js-api:app with user overrides', function () {
   
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({ namespace: 'some.Api', filename: 'someApi' })
+      .withPrompt({ namespace: 'some.Api', module: 'some-api', filename: 'someApi' })
       .on('end', done);
   });
   
@@ -60,7 +60,8 @@ describe('rjs-ember:app with user overrides', function () {
       'src/test/javascript/someApi.spec.js'
     ]);
     
-    assert.fileContent('src/main/javascript/someApi.js', /some\.Api = \(function/);
+    assert.fileContent('src/main/javascript/someApi.js', /window\.some\.Api = API\;/);
+    assert.fileContent('src/main/javascript/someApi.js', /define\(\"some-api\"\,/);
     assert.fileContent('.jshintrc', /"some"\: true/);
   });
 });
