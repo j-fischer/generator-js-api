@@ -68,7 +68,7 @@ module.exports = function (grunt) {
         dest: '<%= config.dist %>/<%= pkg.name %>-<%= pkg.version %>.js',
         options: {
           process: function (content) {
-            return '/* ' + pkg.name + ' v' + pkg.version + ' ' + grunt.template.today("yyyy-mm-dd") + ' - Copyright 2014, SMART Technologies Inc */\n' + content;
+            return '/* ' + pkg.name + ' v' + pkg.version + ' ' + grunt.template.today("yyyy-mm-dd") + ' - Copyright notice here */\n' + content;
           },
         },
       }
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
     
     uglify: {
       options: {
-        banner: '/* <%= pkg.name %> v<%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> - Copyright 2014, SMART Technologies Inc */\n'
+        banner: '/* <%= pkg.name %> v<%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> - Copyright notice here */\n'
       },
       build: {
         src: '<%= config.app %>/<%= pkg.name %>.js',
