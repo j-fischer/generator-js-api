@@ -96,26 +96,20 @@ module.exports = function (grunt) {
     },
     
     karma: {
+      options: {
+        configFile: '<%= config.test %>/karma.conf.js',
+      },
       unit: {
-        configFile: '<%= config.test %>/karma.conf.js',
-        singleRun: true,
-        autoWatch: false,
-        keepalive: true,
-        colors: false,
-        browsers: ['Chrome'],
-        reporters: ['progress', 'coverage']
-      },
-      watch: {
-        options: {
-          configFile: '<%= config.test %>/karma.conf.js'
-        },
-        reporters: ['progress']
-      },
-      unit_phantomjs: {
-        configFile: '<%= config.test %>/karma.conf.js',
         singleRun: true,
         browsers: ['PhantomJS'],
         reporters: ['dots', 'coverage']
+      },
+      watch: {
+        browsers: ['PhantomJS'],
+        reporters: ['dots', 'coverage']
+      },
+      debug: {
+        reporters: ['progress']
       }
     },
 
@@ -134,11 +128,13 @@ module.exports = function (grunt) {
   // Verify installation
   grunt.registerTask('verify', ['checkDependencies']);
   
+  grunt.registerTask('test', ['karma:unit']);
+  
   // Build
   grunt.registerTask('build', [
     'clean',
     'jshint',
-    'karma:unit_phantomjs',
+    'test',
     'copy:dist',
     'uglify',
     'jsdoc'
