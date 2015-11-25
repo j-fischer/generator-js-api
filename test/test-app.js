@@ -14,7 +14,7 @@ describe('js-api:app with skip-install option', function () {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({ namespace: 'my.Api', filename: 'api' })
+      .withPrompts({ namespace: 'my.Api', filename: 'api' })
       .on('end', done);
   });
 
@@ -50,7 +50,7 @@ describe('js-api:app with user overrides', function () {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({ namespace: 'some.Api', module: 'some-api', filename: 'someApi' })
+      .withPrompts({ namespace: 'some.Api', module: 'some-api', filename: 'someApi' })
       .on('end', done);
   });
   
@@ -91,7 +91,7 @@ describe('run grunt', function () {
   it ('should pass grunt build', function (done) {
     app
       .withOptions({ 'skip-install': true })
-      .withPrompt({ namespace: 'my.Api', filename: 'api' })
+      .withPrompts({ namespace: 'my.Api', filename: 'api' })
       .on('end', function () {
         exec('grunt', function (error, stdout, stderr) {
           if (error)

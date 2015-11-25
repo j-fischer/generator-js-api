@@ -4,6 +4,14 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
+  
+  _copy: function(src, dest) {
+    this.fs.copy(
+      this.templatePath(src),
+      this.destinationPath(dest)
+    );
+  },
+  
   _copyAndReplace: function(args) {
     var file = this.readFileAsString(this.templatePath(args.sourcePath));
     
@@ -56,7 +64,7 @@ module.exports = yeoman.generators.Base.extend({
     app: function () {
       var answers = this.env.options;
           
-      this.src.copy('Gruntfile.js', 'Gruntfile.js');
+      this._copy('Gruntfile.js', 'Gruntfile.js');
       
       this._copyAndReplace({
         sourcePath: 'package.json', 
@@ -84,15 +92,15 @@ module.exports = yeoman.generators.Base.extend({
         }]
       });
       
-      this.src.copy('src/test/karma.conf.js', 'src/test/karma.conf.js');
+      this._copy('src/test/karma.conf.js', 'src/test/karma.conf.js');
     },
 
     projectfiles: function () {
       var answers = this.env.options;
       
-      this.src.copy('editorconfig', '.editorconfig');
-      this.src.copy('gitignore', '.gitignore');
-      this.src.copy('hgignore', '.hgignore');
+      this._copy('editorconfig', '.editorconfig');
+      this._copy('gitignore', '.gitignore');
+      this._copy('hgignore', '.hgignore');
       
       this._copyAndReplace({
         sourcePath: 'jshintrc', 
