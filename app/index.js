@@ -12,15 +12,12 @@ module.exports = yeoman.generators.Base.extend({
     );
   },
   
-  _copyAndReplace: function(args) {
-    var file = this.readFileAsString(this.templatePath(args.sourcePath));
-    
-    for (var i = 0; i < args.replacements.length; i++) {
-      var repl = args.replacements[i];
-      file = file.replace(repl.placeholder, repl.value);
-    }
-    
-    this.write(this.destinationPath(args.destPath || args.sourcePath), file);
+  _copyAndReplace: function(src, dest, context) {
+    this.fs.copyTpl(
+      this.templatePath(src),
+      this.destinationPath(dest),
+      context
+    );
   },
   
   initializing: function () {
@@ -66,31 +63,30 @@ module.exports = yeoman.generators.Base.extend({
           
       this._copy('Gruntfile.js', 'Gruntfile.js');
       
-      this._copyAndReplace({
-        sourcePath: 'package.json', 
-        replacements: [{
-          placeholder: '{{$FILENAME}}', 
-          value: answers.filename
-        }]
-      });
+      this._copyAndReplace(
+        'package.json',
+        'package.json', 
+        {
+          packageName: answers.filename 
+        }
+      );
       
-      this._copyAndReplace({
-        sourcePath: 'src/main/javascript/api.js', 
-        destPath: 'src/main/javascript/' + answers.filename + '.js', 
-        replacements: [
-          { placeholder: /\{\{\$API_NAME\}\}/g, value: answers.namespace },
-          { placeholder: /\{\{\$MODULE_NAME\}\}/g, value: answers.module.toLowerCase() }
-        ]
-      });
+      this._copyAndReplace(
+        'src/main/javascript/api.js', 
+        'src/main/javascript/' + answers.filename + '.js', 
+        {
+          apiName: answers.namespace,
+          moduleName: answers.module.toLowerCase()
+        }
+      );
       
-      this._copyAndReplace({
-        sourcePath: 'src/test/javascript/api.spec.js', 
-        destPath: 'src/test/javascript/' + answers.filename + '.spec.js', 
-        replacements: [{
-          placeholder: /\{\{\$API_NAME\}\}/g, 
-          value: answers.namespace
-        }]
-      });
+      this._copyAndReplace(
+        'src/test/javascript/api.spec.js', 
+        'src/test/javascript/' + answers.filename + '.spec.js', 
+        {
+          apiName: answers.namespace
+        }
+      );
       
       this._copy('src/test/karma.conf.js', 'src/test/karma.conf.js');
     },
@@ -102,14 +98,13 @@ module.exports = yeoman.generators.Base.extend({
       this._copy('gitignore', '.gitignore');
       this._copy('hgignore', '.hgignore');
       
-      this._copyAndReplace({
-        sourcePath: 'jshintrc', 
-        destPath: '.jshintrc', 
-        replacements: [{
-          placeholder: '{{$NAMESPACE_ROOT}}', 
-          value: answers.namespace.split('.')[0]
-        }]
-      });
+      this._copyAndReplace(
+        'jshintrc', 
+        '.jshintrc', 
+        { 
+          namespaceRoot: answers.namespace.split('.')[0]
+        }
+      );
     }
   },
 

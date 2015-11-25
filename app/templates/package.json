@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "test",
+  "name": "<%= packageName %>",
   "description": "Javascript API",
   "version": "1.0.0",
   "devDependencies": {

@@ -1,5 +1,5 @@
 (function () { // initializes namepsace if neccessary
-  var namespaceString = '{{$API_NAME}}';
+  var namespaceString = '<%= apiName %>';
   
     var parts = namespaceString.split('.'),
         parent = window,
@@ -23,7 +23,7 @@
  /** 
   * This is a module. 
   *
-  * @exports {{$MODULE_NAME}}
+  * @exports <%= moduleName %>
   */
   var API = {
     /** 
@@ -31,7 +31,7 @@
      * @param {object} args
      *   @param {string} args.aParam: this is a parameter for this method
      *
-     * @module {{$MODULE_NAME}}
+     * @module <%= moduleName %>
      */
     myFunc: function (args) {
       
@@ -39,10 +39,10 @@
   };
   
   if ( typeof define === "function" && define.amd ) {
-  	define("{{$MODULE_NAME}}", [], function() {
+  	define("<%= moduleName %>", [], function() {
   		return API;
   	});
   }
 
-  window.{{$API_NAME}} = API;
+  window.<%= apiName %> = API;
 })();
