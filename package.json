@@ -18,7 +18,8 @@
     "postversion": "git push && git push --tags"
   },
   "files": [
-    "app"
+    "app",
+    "README.md"
   ],
   "keywords": [
     "yeoman-generator"
