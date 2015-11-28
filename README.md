@@ -52,6 +52,15 @@ Feel free to contact me if you like to contribute.
 
 If not, `generator-js-api` is fork-friendly and you can always maintain a custom version which you `npm install && npm link` to continue using via `yo js-api` or a name of your choosing.
 
+## Changelog
+
+### 0.4.1
+
+- Updated package due to NPM packaging errors
+
+### 0.4.0
+
+- Updated all npm dependencies in generator and templates
 
 ## License
 
