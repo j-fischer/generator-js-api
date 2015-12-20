@@ -16,7 +16,7 @@
   "smarttabs": true,
   "globals": {
     "AsyncSpec": false,
-    "sinon": false,
+    "JsMock": false,
     "define": false,
     "describe": false,
     "it": false,

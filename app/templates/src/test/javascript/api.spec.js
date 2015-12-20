@@ -1,31 +1,33 @@
 describe('My API', function(){
-  
-  var _clock;
-  
+
+  var _mock;
+
   /*
    * HELPER FUNCTIONS
    */
   function doSomething() {
     // do something
   }
-  
+
   /*
    * TESTS
    */
   describe('myFunc', function(){
-    
+
     beforeEach(function () {
-      _clock = sinon.useFakeTimers();
+      JsMock.watch(function () {
+        _mock = JsMock.mock("aMock");
+      });
     });
     afterEach(function () {
-      _clock.restore();
-    });  
-		
-		/*
-		 * TESTS
-		 */
+      JsMock.assertWatched();
+    });
+
+    /*
+     * TESTS
+     */
     it("should do something", function () {
       <%= apiName %>.myFunc();
-		});
+    });
   });
 });

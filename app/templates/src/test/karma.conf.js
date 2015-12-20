@@ -6,7 +6,7 @@ module.exports = function (config) {
 
   config.set({
 
-    // base path, that will be used to resolve files and exclude, relative to THIS config file! 
+    // base path, that will be used to resolve files and exclude, relative to THIS config file!
     basePath: '../..',
 
     // frameworks to use
@@ -14,7 +14,7 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/sinon/pkg/sinon.js',
+      'node_modules/js-mock/dist/js-mock.js',
       'node_modules/jquery/dist/jquery.js',
       {pattern: 'src/test/lib/*.js'},
       {pattern: 'src/main/javascript/*.js'},
@@ -32,7 +32,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
     reporters: ['progress', 'coverage'],
-    
+
     coverageReporter: {
       reporters: [
         {
