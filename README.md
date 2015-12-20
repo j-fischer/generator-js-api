@@ -7,10 +7,10 @@
 * Automatically lint your scripts
 * Unit Testing with Karma and PhantomJS
 * Minification and versioning
-* Support for source maps 
-* Support for JSDoc 
+* Support for source maps
+* Support for JSDoc
 
-For more information on what `generator-js-api` can do for you, take a look at the Gruntfile.js. 
+For more information on what `generator-js-api` can do for you, take a look at the Gruntfile.js.
 
 
 ## Getting Started
@@ -23,13 +23,13 @@ For more information on what `generator-js-api` can do for you, take a look at t
 
 * namespace
 
-  The namspace (default is 'my.Api') will be added to the API's (see filename prompt below) file. The API file will ensure that the 
-  namespace is created for testing and that the top level object is known to JSHint. There is no validation done on the namespace. 
-  
+  The namspace (default is 'my.Api') will be added to the API's (see filename prompt below) file. The API file will ensure that the
+  namespace is created for testing and that the top level object is known to JSHint. There is no validation done on the namespace.
+
 * module
 
-  The name of the AMD module (default is 'my-api') will used when registering the API as an AMD module. The module will only be registered if the define function is present and contains the 'amd' property. 
-  
+  The name of the AMD module (default is 'my-api') will used when registering the API as an AMD module. The module will only be registered if the define function is present and contains the 'amd' property.
+
 * filename
 
   This input will be the filename of your API. It will be used to rename the default, 'api.js', to whatever you choose, i.e. my-api.js.
@@ -43,8 +43,8 @@ For more information on what `generator-js-api` can do for you, take a look at t
 
 ## Project Overview
 
-The API template uses a functional style for the API, which allows for better encapsulation by declaring private functions and members. 
-All public interface methods are returned by the function in form of an object. They can either point to private function or be a function implementation themselves. 
+The API template uses a functional style for the API, which allows for better encapsulation by declaring private functions and members.
+All public interface methods are returned by the function in form of an object. They can either point to private function or be a function implementation themselves.
 
 ## Contribute
 
@@ -53,6 +53,10 @@ Feel free to contact me if you like to contribute.
 If not, `generator-js-api` is fork-friendly and you can always maintain a custom version which you `npm install && npm link` to continue using via `yo js-api` or a name of your choosing.
 
 ## Changelog
+
+### 0.5.0
+
+- Switched mocking library from Sinon.JS to [JsMock](http://jsmock.org)
 
 ### 0.4.1
 
