@@ -5,8 +5,8 @@ var path = require('path');
 var fs = require('fs-extra');
 var exec = require('child_process').exec;
 var expect = require ('chai').expect;
-var assert = require('yeoman-generator').assert;
-var helpers = require('yeoman-generator').test;
+var assert = require('yeoman-assert');
+var helpers = require('yeoman-test');
 var os = require('os');
 
 describe('js-api:app with skip-install option', function () {
@@ -28,7 +28,7 @@ describe('js-api:app with skip-install option', function () {
       'Gruntfile.js'
     ]);
   });
-  
+
   it('creates default api and test files', function () {
     assert.file([
       'src/main/javascript/api.js',
@@ -36,7 +36,7 @@ describe('js-api:app with skip-install option', function () {
       'src/test/karma.conf.js'
     ]);
   });
-  
+
   it('does not install node modules ', function () {
     assert.noFile([
       'node_modules'
@@ -45,7 +45,7 @@ describe('js-api:app with skip-install option', function () {
 });
 
 describe('js-api:app with user overrides', function () {
-  
+
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -53,13 +53,13 @@ describe('js-api:app with user overrides', function () {
       .withPrompts({ namespace: 'some.Api', module: 'some-api', filename: 'someApi' })
       .on('end', done);
   });
-  
+
   it('creates user specified api and test files', function () {
     assert.file([
       'src/main/javascript/someApi.js',
       'src/test/javascript/someApi.spec.js'
     ]);
-    
+
     assert.fileContent('src/main/javascript/someApi.js', /window\.some\.Api = API\;/);
     assert.fileContent('src/main/javascript/someApi.js', /define\(\"some-api\"\,/);
     assert.fileContent('.jshintrc', /"some"\: true/);
@@ -67,27 +67,27 @@ describe('js-api:app with user overrides', function () {
 });
 
 describe('run grunt', function () {
-  // Build should pass in less than 60s even on older computers. 
+  // Build should pass in less than 60s even on older computers.
   // Tested on late 2011 Mac Book Pro with 30-60s execution time.
   this.timeout(120000);
-  
+
   var app;
-  
+
   before(function (done) {
     this.timeout(4000);
-    
+
     app = helpers
       .run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'), function (dir) {
-        
+
         // Note: Assumes that 'npm install' was run inside the fixtures folder.
         fs.symlinkSync(path.join(__dirname, 'fixtures/node_modules'),
           path.join(dir, 'node_modules'), 'dir');
-        
+
         done();
       });
   });
-  
+
   it ('should pass grunt build', function (done) {
     app
       .withOptions({ 'skip-install': true })
@@ -96,14 +96,14 @@ describe('run grunt', function () {
         exec('grunt', function (error, stdout, stderr) {
           if (error)
             console.log('Error: ' + error);
-          
-          expect(stdout).to.contain('No problems');  
+
+          expect(stdout).to.contain('No problems');
           expect(stdout).to.contain('Executed 1 of 1 SUCCESS');
           expect(stdout).to.contain('Done, without errors.');
-          
+
           assert.file(['docs/coverage', 'docs/jsdoc']);
           done();
         });
       });
-    });      
+    });
   });
