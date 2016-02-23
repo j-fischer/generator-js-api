@@ -20,6 +20,7 @@
     "grunt-shell": "1.1.2",
     "istanbul": "0.4.1",
     "jquery": "2.1.4",
+    "js-mock": "0.x",
     "jshint-stylish": "2.1.0",
     "karma": "~0.13.15",
     "karma-chrome-launcher": "0.2.1",
@@ -34,7 +35,6 @@
     "karma-teamcity-reporter": "0.2",
     "load-grunt-tasks": "3.3.0",
     "requirejs": "2.1.22",
-    "js-mock": "^0.9.0",
     "time-grunt": "1.2.2"
   }
 }
