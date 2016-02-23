@@ -19,6 +19,7 @@
     "grunt-karma": "~0.12.1",
     "grunt-shell": "1.1.2",
     "istanbul": "0.4.1",
+    "jit-grunt": "^0.9.1",
     "jquery": "2.1.4",
     "js-mock": "0.x",
     "jshint-stylish": "2.1.0",
