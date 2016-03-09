@@ -1,7 +1,7 @@
 {
   "name": "generator-js-api",
   "version": "0.6.0",
-  "description": "Yeoman generator",
+  "description": "Generates a setup for building a Javascript API supporting the AMD modules and more.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "j-fischer/generator-js-api",
@@ -22,7 +22,10 @@
     "README.md"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "javascript",
+    "api",
+    "amd"
   ],
   "dependencies": {
     "yeoman-generator": "^0.22.5",
