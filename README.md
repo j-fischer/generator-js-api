@@ -54,6 +54,17 @@ If not, `generator-js-api` is fork-friendly and you can always maintain a custom
 
 ## Changelog
 
+### 0.7.0
+
+- Upgraded yeoman-generator dependency and fixed deprecated calls
+- Changed JsMock dependency version to 0.x
+- Switch grunt task loader to git-grunt
+- Added missing dependencies to package.json
+
+### 0.6.0
+
+- Upgraded yeoman-generator dependency and fixed deprecated calls
+
 ### 0.5.0
 
 - Switched mocking library from Sinon.JS to [JsMock](http://jsmock.org)
