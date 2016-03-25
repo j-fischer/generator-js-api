@@ -54,6 +54,11 @@ If not, `generator-js-api` is fork-friendly and you can always maintain a custom
 
 ## Changelog
 
+### 0.8.0
+
+- Updated dependencies of the API project
+- Fixed issue in Gruntfile where the wrong file names would be used inside the "dist" folder
+
 ### 0.7.0
 
 - Upgraded yeoman-generator dependency and fixed deprecated calls
