@@ -64,8 +64,8 @@ module.exports = function (grunt) {
 
     copy: {
       dist: {
-        src: '<%= config.app %>/<%= pkg.name %>.js',
-        dest: '<%= config.dist %>/<%= pkg.name %>-<%= pkg.version %>.js',
+        src: '<%= config.app %>/<$= fileName $>.js',
+        dest: '<%= config.dist %>/<$= fileName $>-<%= pkg.version %>.js',
         options: {
           process: function (content) {
             return '/* ' + pkg.name + ' v' + pkg.version + ' ' + grunt.template.today("yyyy-mm-dd") + ' - Copyright notice here */\n' + content;
@@ -79,8 +79,8 @@ module.exports = function (grunt) {
         banner: '/* <%= pkg.name %> v<%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> - Copyright notice here */\n'
       },
       build: {
-        src: '<%= config.app %>/<%= pkg.name %>.js',
-        dest: '<%= config.dist %>/<%= pkg.name %>-<%= pkg.version %>.min.js'
+        src: '<%= config.app %>/<$= fileName $>.js',
+        dest: '<%= config.dist %>/<$= fileName $>-<%= pkg.version %>.min.js'
       }
     },
 

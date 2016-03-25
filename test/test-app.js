@@ -93,7 +93,7 @@ describe('run grunt', function () {
       .withOptions({ 'skip-install': true })
       .withPrompts({ namespace: 'my.Api', filename: 'api' })
       .on('end', function () {
-        exec('grunt', function (error, stdout, stderr) {
+        exec('grunt', function (error, stdout) {
           if (error)
             console.log('Error: ' + error);
 
@@ -102,6 +102,8 @@ describe('run grunt', function () {
           expect(stdout).to.contain('Done, without errors.');
 
           assert.file(['docs/coverage', 'docs/jsdoc']);
+          assert.file(['dist/api-1.0.0.js', 'dist/api-1.0.0.min.js']);
+
           done();
         });
       });

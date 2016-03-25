@@ -12,11 +12,12 @@ module.exports = yeoman.Base.extend({
     );
   },
 
-  _copyAndReplace: function(src, dest, context) {
+  _copyAndReplace: function(src, dest, context, options) {
     this.fs.copyTpl(
       this.templatePath(src),
       this.destinationPath(dest),
-      context
+      context,
+      options
     );
   },
 
@@ -61,7 +62,16 @@ module.exports = yeoman.Base.extend({
     app: function () {
       var answers = this.env.options;
 
-      this._copy('Gruntfile.js', 'Gruntfile.js');
+      this._copyAndReplace(
+        'Gruntfile.js',
+        'Gruntfile.js',
+        {
+          fileName: answers.filename
+        },
+        {
+          delimiter: "$"
+        }
+      );
 
       this._copyAndReplace(
         'package.json',
