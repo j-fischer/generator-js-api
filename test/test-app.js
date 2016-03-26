@@ -89,6 +89,8 @@ describe('run grunt', function () {
   });
 
   it ('should pass grunt build', function (done) {
+    this.timeout(180000);
+    
     app
       .withOptions({ 'skip-install': true })
       .withPrompts({ namespace: 'my.Api', filename: 'api' })
