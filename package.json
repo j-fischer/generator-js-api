@@ -1,6 +1,6 @@
 {
   "name": "generator-js-api",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Generates a setup for building a Javascript API supporting the AMD modules and more.",
   "license": "MIT",
   "main": "app/index.js",
