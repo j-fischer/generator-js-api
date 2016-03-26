@@ -95,7 +95,9 @@ describe('run grunt', function () {
       .on('end', function () {
         exec('grunt', function (error, stdout) {
           if (error)
-            console.log('Error: ' + error);
+            console.log('Error: ' + error + "\n\n" + stdout);
+
+          console.log(stdout);
 
           expect(stdout).to.contain('No problems');
           expect(stdout).to.contain('Executed 1 of 1 SUCCESS');
