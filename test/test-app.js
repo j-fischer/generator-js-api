@@ -89,13 +89,13 @@ describe('run grunt', function () {
   });
 
   it ('should pass grunt build', function (done) {
-    this.timeout(180000);
+    this.timeout(130000);
     
     app
       .withOptions({ 'skip-install': true })
       .withPrompts({ namespace: 'my.Api', filename: 'api' })
       .on('end', function () {
-        exec('grunt', function (error, stdout) {
+        exec('grunt', { timeout: 120000 }, function (error, stdout) {
           if (error)
             console.log('Error: ' + error + "\n\n" + stdout);
 
