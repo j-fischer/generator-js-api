@@ -10,6 +10,8 @@ var helpers = require('yeoman-test');
 var os = require('os');
 
 describe('js-api:app with skip-install option', function () {
+  this.timeout(5000);
+
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -90,7 +92,7 @@ describe('run grunt', function () {
 
   it ('should pass grunt build', function (done) {
     this.timeout(130000);
-    
+
     app
       .withOptions({ 'skip-install': true })
       .withPrompts({ namespace: 'my.Api', filename: 'api' })
