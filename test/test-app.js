@@ -27,6 +27,7 @@ describe('js-api:app with skip-install option', function () {
       '.jshintrc',
       '.gitignore',
       '.hgignore',
+      '.travis.yml',
       'Gruntfile.js'
     ]);
   });

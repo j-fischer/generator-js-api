@@ -107,6 +107,7 @@ module.exports = yeoman.Base.extend({
       this._copy('editorconfig', '.editorconfig');
       this._copy('gitignore', '.gitignore');
       this._copy('hgignore', '.hgignore');
+      this._copy('travis.yml', '.travis.yml');
 
       this._copyAndReplace(
         'jshintrc',
